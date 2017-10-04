@@ -50,7 +50,7 @@ define('DB_COLLATE', '');
 2. Create a new theme folder using Terminal $ `mkdir custom-theme` or via Atom by right clicking on the themes folder and select create new folder. Note: you can name your theme folder anything you like I choose custom-theme as a generic name for this example.
 3. Inside __custom-theme__ create a __css__ folder $ `mkdir custom-theme/css` and also create a _js__ folder $ `mkdir custom-theme/js`.
 4. Move into your custom theme folder $ `cd custom-theme` and create three files __index.php__ and __css/style.css__ and __js/app.js__$ `touch index.php css/style.css js/app.js`.
-5. In __css/style.css__ in your code editor add the following code (Note: You can change any of the settings in the CSS comment at the top as you wish these will eventually appear in your admin dashboard view under Appearance>Themes):  
+5. In __css/style.css__ in your code editor add the following code;
 ```css
 /*
 Theme Name: Custom Theme
@@ -63,7 +63,9 @@ Tags: bootstrap
 h1 {
   color: red;
 }
-```
+```  
+Note: You can change any of the settings in the CSS comment at the top as you wish these will eventually appear in your admin dashboard view under Appearance>Themes
+
 6. In __js/app.js__ in your code editor add the following code:  
 ```javascript
 console.log('Hello from your theme!');
