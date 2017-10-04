@@ -68,7 +68,7 @@ Note: You can change any of the settings in the CSS comment at the top as you wi
 6. In __js/app.js__ in your code editor add the following code:  
 ```javascript
 console.log('Hello from your theme!');
-```  
+```
 7. In __index.php__ in your code editor put the code:  
 ```php
 <!DOCTYPE html>
@@ -86,10 +86,10 @@ console.log('Hello from your theme!');
 </html>
 ```  
 Note that in our title element we put `<title><?php echo get_bloginfo('name'); ?></title>` this uses the get_bloginfo() function to print the name of our site that we first set when we installed WordPress. We also printed this site name in the heading inside our page body. We used this function again to link to our CSS and JS files by making use of `<?php echo get_bloginfo('template_directory'); ?>` which was essential for printing the correct file path to our assets. For full details of what can be done with this function take a look at the [docs here](https://developer.wordpress.org/reference/functions/get_bloginfo/).
-6. Now head back to the admin dashboard in your browser and click Appearance>Themes
-7. Under Custom Theme (or whatever your theme name you set was) click Activate.
-8. Then visit `localhost` in your browser to see your site. It should say your site title in an h1 element and the loaded CSS should style the text color as red. Additonally if you view the JavaScript console using the Devloper Tools you should see it print "Hello from your theme!".
-9. Now that our theme is working let's delete the previous theme folders (you don't have to do this, but I won't be using the default themes any longer and they are just taking up space.) I'll get rid of __twentyseventeen__, __twentysixteen__, and __twentyfifteen__.
+8. Now head back to the admin dashboard in your browser and click Appearance>Themes
+9. Under Custom Theme (or whatever your theme name you set was) click Activate.
+10. Then visit `localhost` in your browser to see your site. It should say your site title in an h1 element and the loaded CSS should style the text color as red. Additonally if you view the JavaScript console using the Devloper Tools you should see it print "Hello from your theme!".
+11. Now that our theme is working let's delete the previous theme folders (you don't have to do this, but I won't be using the default themes any longer and they are just taking up space.) I'll get rid of __twentyseventeen__, __twentysixteen__, and __twentyfifteen__.
 
 ## Adding Bootstrap
 
