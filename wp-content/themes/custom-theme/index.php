@@ -9,7 +9,6 @@
 </head>
 <body>
   <h1><?php echo get_bloginfo('name'); ?></h1>
-
   <script src="<?php echo get_bloginfo('template_directory'); ?>/js/app.js"></script>
 </body>
 </html>
