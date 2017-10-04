@@ -68,7 +68,7 @@ h1 {
 ```javascript
 console.log('Hello from your theme!');
 ```
-7. In __index.php__ in your code editor put the code (Note that in our title element we put `<title><?php echo get_bloginfo('name'); ?></title>` this uses the get_bloginfo() function to print the name of our site that we first set when we installed WordPress. We also printed this site name in the heading inside our page body. We used this function again to link to our CSS and JS files by making use of `<?php echo get_bloginfo('template_directory'); ?>` which was essential for printing the correct file path to our assets. For full details of what can be done with this function take a look at the [docs here](https://developer.wordpress.org/reference/functions/get_bloginfo/).):  
+7. In __index.php__ in your code editor put the code:  
 ```php
 <!DOCTYPE html>
 <html lang="en">
@@ -83,7 +83,9 @@ console.log('Hello from your theme!');
   <h1><?php echo get_bloginfo('name'); ?></h1>
 </body>
 </html>
-```
+```  
+Note that in our title element we put `<title><?php echo get_bloginfo('name'); ?></title>` this uses the get_bloginfo() function to print the name of our site that we first set when we installed WordPress. We also printed this site name in the heading inside our page body. We used this function again to link to our CSS and JS files by making use of `<?php echo get_bloginfo('template_directory'); ?>` which was essential for printing the correct file path to our assets. For full details of what can be done with this function take a look at the [docs here](https://developer.wordpress.org/reference/functions/get_bloginfo/).)
+
 8. Now head back to the admin dashboard in your browser and click Appearance>Themes
 9. Under Custom Theme (or whatever your theme name you set was) click Activate.
 10. Then visit `localhost` in your browser to see your site. It should say your site title in an h1 element and the loaded CSS should style the text color as red. Additonally if you view the JavaScript console using the Devloper Tools you should see it print "Hello from your theme!".
