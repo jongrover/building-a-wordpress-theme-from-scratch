@@ -1,7 +1,10 @@
 # Building a WordPress Theme From Scratch
-Finished example wordpress app featuring a custom built theme
+
+Finished example WordPress app featuring a custom built theme. Instructions provided are specific to using Mac ecosystem. I tried to provide relevant links to explanations for Windows users, but many setup steps will differ. However all PHP, HTML, CSS code for creating the theme is platform independant and will be the same for both Mac and Windows users.
 
 ## Steps
+
+## Setup Local Server and Install WordPress
 
 1. Download and install a code editor (if necessary) such as [Atom](https://atom.io).
 2. Download app to spin up a local PHP Apache Server such as [MAMP](https://www.mamp.info/en/) for Mac or [WAMP](http://www.wampserver.com/en/) for Windows.
@@ -42,4 +45,7 @@ define('DB_COLLATE', '');
 17. On the next page set a Site Title I choose `WP Theme From Scratch`. Also set a username typically this is `admin`. Then set a password you will remember. Also set an admin email. Then click Install WordPress button.
 18. On the next page click Log In and use your credentials to login to your site. If all goes well you should see the admin dashboard for your site.
 19. Run any updates it suggests under Dashboard > updates
-20. 
+
+## Creating A Custom Theme
+
+1. ...
