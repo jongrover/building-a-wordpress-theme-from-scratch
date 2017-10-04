@@ -46,4 +46,51 @@ define('DB_COLLATE', '');
 
 ## Creating A Custom Theme
 
+1. In Terminal (or in code editor) head to the theme folder at __wp-content/themes/__ $ `cd wp-content/themes`.
+2. Create a new theme folder using Terminal $ `mkdir custom-theme` or via Atom by right clicking on the themes folder and select create new folder. Note: you can name your theme folder anything you like I choose custom-theme as a generic name for this example.
+3. Inside __custom-theme__ create a __css__ folder $ `mkdir custom-theme/css` and also create a _js__ folder $ `mkdir custom-theme/js`.
+4. Move into your custom theme folder $ `cd custom-theme` and create three files __index.php__ and __css/style.css__ and __js/app.js__$ `touch index.php css/style.css js/app.js`.
+5. In __css/style.css__ in your code editor add the following code:  
+```css
+/*
+Theme Name: Custom Theme
+Author: Jonathan Grover
+Description: Example Theme from Github Repo (https://github.com/jongrover/building-a-wordpress-theme-from-scratch)
+Version: 0.0.1
+Tags: bootstrap
+*/
+
+h1 {
+  color: red;
+}
+```  
+Note: You can change any of the settings in the CSS comment at the top as you wish these will eventually appear in your admin dashboard view under Appearance>Themes.
+6. In __js/app.js__ in your code editor add the following code:  
+```javascript
+console.log('Hello from your theme!');
+```  
+7. In __index.php__ in your code editor put the code:  
+```php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title><?php echo get_bloginfo('name'); ?></title>
+  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/style.css">
+</head>
+<body>
+  <h1><?php echo get_bloginfo('name'); ?></h1>
+</body>
+</html>
+```  
+Note that in our title element we put `<title><?php echo get_bloginfo('name'); ?></title>` this uses the get_bloginfo() function to print the name of our site that we first set when we installed WordPress. We also printed this site name in the heading inside our page body. We used this function again to link to our CSS and JS files by making use of `<?php echo get_bloginfo('template_directory'); ?>` which was essential for printing the correct file path to our assets. For full details of what can be done with this function take a look at the [docs here](https://developer.wordpress.org/reference/functions/get_bloginfo/).
+6. Now head back to the admin dashboard in your browser and click Appearance>Themes
+7. Under Custom Theme (or whatever your theme name you set was) click Activate.
+8. Then visit `localhost` in your browser to see your site. It should say your site title in an h1 element and the loaded CSS should style the text color as red. Additonally if you view the JavaScript console using the Devloper Tools you should see it print "Hello from your theme!".
+9. Now that our theme is working let's delete the previous theme folders (you don't have to do this, but I won't be using the default themes any longer and they are just taking up space.) I'll get rid of __twentyseventeen__, __twentysixteen__, and __twentyfifteen__.
+
+## Adding Bootstrap
+
 1. ...

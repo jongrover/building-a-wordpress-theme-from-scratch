@@ -1,0 +1,11 @@
+/*
+Theme Name: Custom Theme
+Author: Jonathan Grover
+Description: Example Theme from Github Repo (https://github.com/jongrover/building-a-wordpress-theme-from-scratch)
+Version: 0.0.1
+Tags: bootstrap
+*/
+
+h1 {
+  color: red;
+}
