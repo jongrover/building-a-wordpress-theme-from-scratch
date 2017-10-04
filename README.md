@@ -91,7 +91,7 @@ Note that in our title element we put `<title><?php echo get_bloginfo('name'); ?
 
 8. Now head back to the admin dashboard in your browser and click Appearance>Themes
 9. Under Custom Theme (or whatever your theme name you set was) click Activate.
-10. Then visit `localhost` in your browser to see your site. It should say your site title in an h1 element and the loaded CSS should style the text color as red. Additonally if you view the JavaScript console using the Devloper Tools you should see it print "Hello from your theme!".
+10. Then visit `localhost` in your browser to see your site. It should say your site title in an h1 element and the loaded CSS should style the text color as red. Additionally if you view the JavaScript console using the Devloper Tools you should see it print "Hello from your theme!".
 11. Now that our theme is working let's delete the previous theme folders (you don't have to do this, but I won't be using the default themes any longer and they are just taking up space.) I'll get rid of __twentyseventeen__, __twentysixteen__, and __twentyfifteen__.
 
 ## Adding Bootstrap
