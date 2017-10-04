@@ -2,8 +2,6 @@
 
 Finished example WordPress app featuring a custom built theme. Instructions provided are specific to using Mac ecosystem. I tried to provide relevant links to explanations for Windows users, but many setup steps will differ. However all PHP, HTML, CSS code for creating the theme is platform independant and will be the same for both Mac and Windows users.
 
-## Steps
-
 ## Setup Local Server and Install WordPress
 
 1. Download and install a code editor (if necessary) such as [Atom](https://atom.io).
