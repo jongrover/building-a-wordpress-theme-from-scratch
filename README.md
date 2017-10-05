@@ -96,4 +96,30 @@ Note that in our title element we put `<title><?php echo get_bloginfo('name'); ?
 
 ## Adding Bootstrap
 
-1. ...
+1. Start by downloading [Bootstrap](http://getbootstrap.com/docs/4.0/getting-started/download/).
+2. Next download [jQuery](https://code.jquery.com/jquery-3.2.1.slim.min.js) a Bootstrap dependency.
+3. Also download [Popper](https://gist.github.com/FezVrasta/16c5d5e5ff1211922ddcf090c8454d74/archive/9372bdf66f7d899a5daaf0ff06ff89be92561c83.zip) another Bootstrap dependency.
+4. After all downloads finish unzip them and move all CSS into your projects __css__ folder and move all JS files into your __js__ folder.
+5. Now let's link to these new files for Bootstrap in our __index.php__ file in the root of our theme folder __custom-theme/index.php__. Here We'll link to the files the same way we linked to our __style.css__ and __app.js__.  
+```php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title><?php echo get_bloginfo('name'); ?></title>
+  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/style.css">
+</head>
+<body>
+  <h1><?php echo get_bloginfo('name'); ?></h1>
+  <script src="<?php echo get_bloginfo('template_directory'); ?>/js/jquery-3.2.1.slim.min.js"></script>
+  <script src="<?php echo get_bloginfo('template_directory'); ?>/js/popper.min.js"></script>
+  <script src="<?php echo get_bloginfo('template_directory'); ?>/js/bootstrap.min.js"></script>
+  <script src="<?php echo get_bloginfo('template_directory'); ?>/js/app.js"></script>
+</body>
+</html>
+```
+6. Save all files and head to localhost in your browser, open the Network tab in the Developer  Tools and refresh the page. You should see Bootstrap CSS, JS, jQuery, and Popper are all correctly loading.
+7. ...
