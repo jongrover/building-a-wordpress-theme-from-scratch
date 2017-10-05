@@ -122,4 +122,7 @@ Note that in our title element we put `<title><?php echo get_bloginfo('name'); ?
 </html>
 ```
 6. Save all files and head to localhost in your browser, open the Network tab in the Developer  Tools and refresh the page. You should see Bootstrap CSS, JS, jQuery, and Popper are all correctly loading.
-7. ...
+
+## Dividing Page Layout
+
+1. ...
