@@ -209,7 +209,7 @@ Note that in our title element we put `<title><?php echo get_bloginfo('name'); ?
     <div class="container">
       <div class="row">
         <div class="col">
-          <small>&copy; 2017 Jonathan Grover. All Rights Reserved.</small>
+          <p><small>&copy; 2017 Jonathan Grover. All Rights Reserved.</small></p>
         </div><!-- .col -->
       </div><!-- .row -->
     </div><!-- .container -->
@@ -313,7 +313,7 @@ Notice I also added to the code above `<?php echo get_bloginfo( 'wpurl' ); ?>` i
   <div class="container">
     <div class="row">
       <div class="col">
-        <small>&copy; 2017 Jonathan Grover. All Rights Reserved.</small>
+        <p><small>&copy; 2017 Jonathan Grover. All Rights Reserved.</small></p>
       </div><!-- .col -->
     </div><!-- .row -->
   </div><!-- .container -->
@@ -396,7 +396,9 @@ add_action( 'init', 'register_my_menus' );
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <?php wp_nav_menu(array('theme_location' => 'header-menu')); ?>
+            <?php if (has_nav_menu('header-menu')) {
+              wp_nav_menu(array('theme_location' => 'header-menu'));
+            } ?>
           </ul>
         </div>
       </div><!-- .container -->
@@ -510,17 +512,128 @@ add_action( 'widgets_init', 'register_my_widgets' );
 }
 ```
 4. Now in the browser head to Appearance>Widgets and drag a Widget such as Archives to the new widget area labeled Sidebar. Now in the user facing view of the side you should see the Widget location appearing at in the sidebar of the blog link.
+5. Now let's add four additional `register_sidebar` functions for new footer widget areas in __functions.php__:  
+```php
+function register_my_widgets() {
+  register_sidebar(array(
+    'name' => 'Sidebar',
+    'id' => 'sidebar-1',
+		'description'   => 'Custom Sidebar Widget',
+    'before_widget' => '<div class="sidebar-widget">',
+    'after_widget' => '</div>',
+    'before_title' => '<h4>',
+    'after_title' => '</h4>',
+  ));
+  register_sidebar(array(
+    'name' => 'Footer 1',
+    'id' => 'footer-1',
+		'description'   => 'Custom Footer Widget',
+    'before_widget' => '<div class="footer-widget">',
+    'after_widget' => '</div>',
+    'before_title' => '<h4>',
+    'after_title' => '</h4>',
+  ));
+  register_sidebar(array(
+    'name' => 'Footer 2',
+    'id' => 'footer-2',
+		'description'   => 'Custom Footer Widget',
+    'before_widget' => '<div class="footer-widget">',
+    'after_widget' => '</div>',
+    'before_title' => '<h4>',
+    'after_title' => '</h4>',
+  ));
+  register_sidebar(array(
+    'name' => 'Footer 3',
+    'id' => 'footer-3',
+		'description'   => 'Custom Footer Widget',
+    'before_widget' => '<div class="footer-widget">',
+    'after_widget' => '</div>',
+    'before_title' => '<h4>',
+    'after_title' => '</h4>',
+  ));
+  register_sidebar(array(
+    'name' => 'Footer 4',
+    'id' => 'footer-4',
+		'description'   => 'Custom Footer Widget',
+    'before_widget' => '<div class="footer-widget">',
+    'after_widget' => '</div>',
+    'before_title' => '<h4>',
+    'after_title' => '</h4>',
+  ));
+}
+```
+6. In __footer.php__ create a new row with four columns and each has the widget placement code within:  
+```php
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <?php if (is_active_sidebar('footer-1')) {
+          dynamic_sidebar('footer-1');
+        } ?>
+      </div>
+      <div class="col-md-3">
+        <?php if (is_active_sidebar('footer-2')) {
+          dynamic_sidebar('footer-2');
+        } ?>
+      </div>
+      <div class="col-md-3">
+        <?php if (is_active_sidebar('footer-3')) {
+          dynamic_sidebar('footer-3');
+        } ?>
+      </div>
+      <div class="col-md-3">
+        <?php if (is_active_sidebar('sidebar-4')) {
+          dynamic_sidebar('footer-4');
+        } ?>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p><small>&copy; 2017 Jonathan Grover. All Rights Reserved.</small></p>
+      </div><!-- .col -->
+    </div><!-- .row -->
+  </div><!-- .container -->
+</footer>
+```
+7. Add some styles for our footer in __style.css__:  
+```css
+footer {
+  margin-top: 40px;
+  border-top: 1px solid #ccc;
+  background: #f8f9fa;
+  padding-bottom: 40px;
+}
 
-## Create a Theme Screenshot
+footer .row {
+  padding: 40px 0 10px;
+}
 
-1.  In a browser head to localhost and take a screenshot of one of your pages I choose my blog page. Then open the file in Photoshop and resize it to 880px x 660px and save it under the name __screenshot.png__ in the root of your custom theme folder in my case it is at __custom-theme/screenshot.png__. In the browser Admin Dashboard head to Appearance>Themes and you should see your thumbnail image appearing as well as all the details you included in your style.css file.
+.copyright {
+  text-align: left;
+  color: #333;
+}
 
-## ...
+[class$="-widget"] .menu-item, [class$="-widget"] .menu-item a {
+  display: block;
+  padding: 0;
+}
+
+[class$="-widget"] ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+```
+8. In the browser under Appearance>Widgets your four new footer Widget areas should appear.
+
+## Displaying Comments On Posts & Pages
 
 1. Create a new file called __comments.php__ and add the following code:  
 ```php
 <?php
 $args = array(
+  'post_id' => get_the_ID(),
   'status' => 'approve'
 );
 $comments_query = new WP_Comment_Query;
@@ -572,3 +685,11 @@ comment_form();
   cursor: pointer;
 }
 ```
+
+## Create a Theme Screenshot
+
+1.  In a browser head to localhost and take a screenshot of one of your pages I choose my Home page. Then open the file in Photoshop and resize it to 880px x 660px and save it under the name __screenshot.png__ in the root of your custom theme folder in my case it is at __custom-theme/screenshot.png__. In the browser Admin Dashboard head to Appearance>Themes and you should see your thumbnail image appearing as well as all the details you included in your style.css file.
+
+## Adding Customizable Theme Areas
+
+1. ...

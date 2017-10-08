@@ -22,6 +22,26 @@ header {
 }
 
 main {
+  background: white;
+}
+
+footer {
+  margin-top: 40px;
+  border-top: 1px solid #ccc;
+  background: #f8f9fa;
+  padding-bottom: 40px;
+}
+
+footer .row {
+  padding: 40px 0 10px;
+}
+
+.copyright {
+  text-align: left;
+  color: #333;
+}
+
+main {
   margin-top: 80px;
 }
 
@@ -33,6 +53,11 @@ main {
 .menu-item a {
     display: inline-block;
     padding: .5rem 1rem;
+}
+
+[class$="-widget"] .menu-item, [class$="-widget"] .menu-item a {
+  display: block;
+  padding: 0;
 }
 
 .navbar-nav .menu-item a {
@@ -53,7 +78,7 @@ main {
   color: darkblue;
 }
 
-.sidebar-widget ul {
+[class$="-widget"] ul {
   list-style: none;
   padding-left: 0;
 }

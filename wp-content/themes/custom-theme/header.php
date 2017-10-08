@@ -19,7 +19,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <?php wp_nav_menu(array('theme_location' => 'header-menu')); ?>
+            <?php if (has_nav_menu('header-menu')) {
+              wp_nav_menu(array('theme_location' => 'header-menu'));
+            } ?>
           </ul>
         </div>
       </div><!-- .container -->
