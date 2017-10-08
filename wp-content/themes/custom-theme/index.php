@@ -8,7 +8,11 @@
         <section class="col-md-9">
           <?php if ( have_posts() ) : while ( have_posts() ) : the_post();
     				get_template_part( 'content', get_post_format() );
-    			endwhile; endif; ?>
+    			endwhile; endif;
+
+          if (comments_open() || get_comments_number()) {
+            comments_template();
+          } ?>
         </section>
 
         <?php get_sidebar(); ?>

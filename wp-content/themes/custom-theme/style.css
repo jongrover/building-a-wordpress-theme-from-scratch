@@ -58,6 +58,34 @@ main {
   padding-left: 0;
 }
 
+.comment-respond {
+  border: 1px solid #ccc;
+  background: #efefef;
+  padding: 20px;
+}
+
+.form-submit input[type="submit"] {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .5rem .75rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  border-radius: .25rem;
+  transition: all .15s ease-in-out;
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  cursor: pointer;
+}
+
 @media (min-width: 992px) {
   .menu-item {
     display: inline-block;

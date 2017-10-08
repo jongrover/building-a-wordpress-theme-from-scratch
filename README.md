@@ -49,7 +49,7 @@ define('DB_COLLATE', '');
 1. In Terminal (or in code editor) head to the theme folder at __wp-content/themes/__ $ `cd wp-content/themes`.
 2. Create a new theme folder using Terminal $ `mkdir custom-theme` or via Atom by right clicking on the themes folder and select create new folder. Note: you can name your theme folder anything you like I choose custom-theme as a generic name for this example.
 3. Inside __custom-theme__ create a __css__ folder $ `mkdir custom-theme/css` and also create a _js__ folder $ `mkdir custom-theme/js`.
-4. Move into your custom theme folder $ `cd custom-theme` and create three files __index.php__ and __css/style.css__ and __js/app.js__$ `touch index.php style.css js/app.js`. Note that we did not save style.css inside the css folder, although we will be putting Bootstrap css in our css folder later on, WordPress requires a style.css file to be located inside the root folder in order to gather theme details.
+4. Move into your custom theme folder $ `cd custom-theme` and create three files __index.php__ and __style.css__ and __js/app.js__$ `touch index.php style.css js/app.js`. Note that we did not save style.css inside the css folder, although we will be putting Bootstrap css in our css folder later on, WordPress requires a style.css file to be located inside the root folder in order to gather theme details.
 5. In __style.css__ in your code editor add the following code:
 ```css
 /*
@@ -118,7 +118,7 @@ Note that in our title element we put `<title><?php echo get_bloginfo('name'); ?
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title><?php echo get_bloginfo('name'); ?></title>
   <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/bootstrap.min.css">
-  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/style.css">
+  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/style.css">
 </head>
 <body>
   <h1><?php echo get_bloginfo('name'); ?></h1>
@@ -143,7 +143,7 @@ Note that in our title element we put `<title><?php echo get_bloginfo('name'); ?
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title><?php echo get_bloginfo('name'); ?></title>
   <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/bootstrap.min.css">
-  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/style.css">
+  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/style.css">
 </head>
 <body>
 
@@ -222,7 +222,7 @@ Note that in our title element we put `<title><?php echo get_bloginfo('name'); ?
 </body>
 </html>
 ```
-2. Then in __custom-theme/css/style.css__ add the code:  
+2. Then in __custom-theme/style.css__ add the code:  
 ```css
 header {
   position: fixed;
@@ -251,7 +251,7 @@ main {
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title><?php echo get_bloginfo('name'); ?></title>
   <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/bootstrap.min.css">
-  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/style.css">
+  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/style.css">
   <?php wp_head(); ?>
 </head>
 <body>
@@ -266,7 +266,7 @@ main {
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title><?php echo get_bloginfo('name'); ?></title>
   <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/bootstrap.min.css">
-  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/style.css">
+  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/style.css">
   <?php wp_head() ?>
 </head>
 <body>
@@ -383,7 +383,7 @@ add_action( 'init', 'register_my_menus' );
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title><?php echo get_bloginfo('name'); ?></title>
   <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/bootstrap.min.css">
-  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/style.css">
+  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/style.css">
   <?php wp_head() ?>
 </head>
 <body>
@@ -403,7 +403,7 @@ add_action( 'init', 'register_my_menus' );
     </nav>
   </header>
 ```
-4. Then in __css/style.css__ add the following code to re-style the links:  
+4. Then in __style.css__ add the following code to re-style the links:  
 ```css
 .menu {
   list-style: none;
@@ -517,4 +517,58 @@ add_action( 'widgets_init', 'register_my_widgets' );
 
 ## ...
 
-1. ...
+1. Create a new file called __comments.php__ and add the following code:  
+```php
+<?php
+$args = array(
+  'status' => 'approve'
+);
+$comments_query = new WP_Comment_Query;
+$comments = $comments_query->query( $args );
+if ( $comments ) {
+  foreach ( $comments as $comment ) {
+    echo '<hr>';
+    echo '<p>'.$comment->comment_content.'</p>';
+  }
+} else {
+  echo '<p>No comments found.</p>';
+}
+comment_form();
+?>
+```
+2. Then in your __index.php__ & __page.php__ add a place for comments to display if they are enabled:  
+```php
+<?php if (comments_open() || get_comments_number()) {
+  comments_template();
+} ?>
+```
+3. Then add some styles for your comment form in __style.css__:  
+```css
+.comment-respond {
+  border: 1px solid #ccc;
+  background: #efefef;
+  padding: 20px;
+}
+
+.form-submit input[type="submit"] {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .5rem .75rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  border-radius: .25rem;
+  transition: all .15s ease-in-out;
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  cursor: pointer;
+}
+```

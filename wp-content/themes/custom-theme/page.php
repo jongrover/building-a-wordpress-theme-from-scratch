@@ -13,6 +13,9 @@
             </article>
 
     			<?php endwhile; ?>
+          <?php if (comments_open() || get_comments_number()) {
+            comments_template();
+          } ?>
         </section>
       </div><!-- .row -->
     </div><!-- .container -->
