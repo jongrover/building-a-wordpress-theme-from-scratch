@@ -6,6 +6,51 @@ Version: 0.0.1
 Tags: bootstrap
 */
 
-h1 {
-  color: red;
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+main {
+  margin-top: 80px;
+}
+
+.menu {
+  list-style: none;
+  padding-left: 0;
+}
+
+.menu-item a {
+    display: inline-block;
+    padding: .5rem 1rem;
+}
+
+.navbar-nav .menu-item a {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.navbar-light .navbar-nav .menu-item a {
+    color: rgba(0,0,0,.5);
+}
+
+.navbar-light .navbar-nav .menu-item a:hover {
+    color: rgba(0,0,0,.7);
+    text-decoration: none;
+}
+
+.navbar-light .navbar-brand.active, .navbar-light .navbar-nav .menu-item a.active, .nav .menu-item a.active {
+  color: darkblue;
+}
+
+@media (min-width: 992px) {
+  .menu-item {
+    display: inline-block;
+  }
+  .navbar-expand-lg .navbar-nav .menu-item a {
+    padding-right: .5rem;
+    padding-left: .5rem;
+  }
 }

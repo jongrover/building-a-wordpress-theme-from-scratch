@@ -5,11 +5,11 @@ Finished example WordPress app featuring a custom built theme. Instructions prov
 ## Setup Local Server and Install WordPress
 
 1. Download and install a code editor (if necessary) such as [Atom](https://atom.io).
-2. Download app to spin up a local PHP Apache Server such as [MAMP](https://www.mamp.info/en/) for Mac or [WAMP](http://www.wampserver.com/en/) for Windows.
+2. Download an app to spin up a local PHP Apache Server such as [MAMP](https://www.mamp.info/en/) for Mac or [WAMP](http://www.wampserver.com/en/) for Windows.
 3. Download Wordpress from [wordpress.org](https://wordpress.org/)
 4. Open MAMP (or WAMP) App and click Start Servers. Please note: The following steps assume MAMP on Mac.
 5. When your browser opens under MySQL heading click the phpMyAdmin link.
-6. After logging into phpMyAdmin in the left hand navigation panel click new and under Create Database name your database something I called mine `wp_dev_db` (make sure there are no spaces in the name you choose). Then click Create. Then in the top navigation click Start. Let's leave this browser tab open and refer to the MySQL database details from here later on.
+6. After logging into phpMyAdmin in the left hand navigation panel click new and under Create Database, name your database something, I called mine `wp_dev_db` (make sure there are no spaces in the name you choose). Then click Create. Then in the top navigation click Start. Let's leave this browser tab open and refer to the MySQL database details from here later on.
 7. Move into the downloaded WordPress folder using Terminal $ `cd ~/Downloads/wordpress` or optionally you can rename the folder first if you like, I renamed mine building-a-wordpress-theme-from-scratch and moved it to my Development folder, I then ran the command $ `cd ~/Development/building-a-wordpress-theme-from-scratch`.
 8. Rename __wp-config-sample.php__ to __wp-config.php__ with $ `mv wp-config-sample.php wp-config.php`.
 9. Open the site in your code editor I'm using [Atom](https://atom.io) with the command $ `atom .`
@@ -64,7 +64,7 @@ h1 {
   color: red;
 }
 ```  
-Note: You can change any of the settings in the CSS comment at the top as you wish these will eventually appear in your admin dashboard view under Appearance>Themes
+Note: You can change any of the settings in the CSS comment at the top as you wish these will eventually appear in your admin dashboard view under Appearance>Themes as details for each theme.
 
 6. In __js/app.js__ in your code editor add the following code:  
 ```javascript
@@ -87,11 +87,11 @@ console.log('Hello from your theme!');
 </body>
 </html>
 ```  
-Note that in our title element we put `<title><?php echo get_bloginfo('name'); ?></title>` this uses the get_bloginfo() function to print the name of our site that we first set when we installed WordPress. We also printed this site name in the heading inside our page body. We used this function again to link to our CSS and JS files by making use of `<?php echo get_bloginfo('template_directory'); ?>` which was essential for printing the correct file path to our assets. For full details of what can be done with this function take a look at the [docs here](https://developer.wordpress.org/reference/functions/get_bloginfo/).)
+Note that in our title element we put `<title><?php echo get_bloginfo('name'); ?></title>` this uses the get_bloginfo() function to print the name of our site that we first set when we installed WordPress. We also printed this site name in the heading inside our page body. We used this function again to link to our CSS and JS files by making use of `<?php echo get_bloginfo('template_directory'); ?>` which was essential for printing the correct file path to our assets. For full details of what can be done with this function take a look at the [docs here](https://developer.wordpress.org/reference/functions/get_bloginfo/).
 
 8. Now head back to the admin dashboard in your browser and click Appearance>Themes
 9. Under Custom Theme (or whatever your theme name you set was) click Activate.
-10. Then visit `localhost` in your browser to see your site. It should say your site title in an h1 element and the loaded CSS should style the text color as red. Additionally if you view the JavaScript console using the Devloper Tools you should see it print "Hello from your theme!".
+10. Then visit `localhost` in your browser to see your site. It should say your site title in an h1 element and the loaded CSS should style the text color as red. Additionally if you view the JavaScript console using the Developer Tools you should see it print "Hello from your theme!".
 11. Now that our theme is working let's delete the previous theme folders (you don't have to do this, but I won't be using the default themes any longer and they are just taking up space.) I'll get rid of __twentyseventeen__, __twentysixteen__, and __twentyfifteen__.
 
 ## Adding Bootstrap
@@ -125,4 +125,342 @@ Note that in our title element we put `<title><?php echo get_bloginfo('name'); ?
 
 ## Dividing Page Layout
 
-1. ...
+1. Let's start by building our layout in __custom-theme/index.php__ and later we'll break it into separate PHP files. Here is my layout code:  
+```php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title><?php echo get_bloginfo('name'); ?></title>
+  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/style.css">
+</head>
+<body>
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="<?php echo get_bloginfo( 'wpurl' ); ?>"><?php echo get_bloginfo('name'); ?></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Blog</a>
+          </li>
+        </ul>
+      </div>
+    </div><!-- .container -->
+  </nav>
+</header>
+
+  <main>
+    <div class="container">
+      <div class="row">
+
+        <section class="col-md-9">
+          <div class="jumbotron">
+            <h1 class="display-3">Welcome</h1>
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <hr class="my-4">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </section>
+
+        <aside class="col-md-3">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Active</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+          </ul>
+        </aside>
+
+      </div><!-- .row -->
+    </div><!-- .container -->
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <small>&copy; 2017 Jonathan Grover. All Rights Reserved.</small>
+        </div><!-- .col -->
+      </div><!-- .row -->
+    </div><!-- .container -->
+  </footer>
+
+  <script src="<?php echo get_bloginfo('template_directory'); ?>/js/jquery-3.2.1.slim.min.js"></script>
+  <script src="<?php echo get_bloginfo('template_directory'); ?>/js/popper.min.js"></script>
+  <script src="<?php echo get_bloginfo('template_directory'); ?>/js/bootstrap.min.js"></script>
+  <script src="<?php echo get_bloginfo('template_directory'); ?>/js/app.js"></script>
+</body>
+</html>
+```
+2. Then in __custom-theme/css/style.css__ add the code:  
+```css
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+main {
+  margin-top: 80px;
+}
+
+.navbar-light .navbar-brand.active, .navbar-light .navbar-nav .nav-link.active, .nav .nav-link.active {
+  color: darkblue;
+}
+```
+3. Save all pages and refresh in the browser and you should see an updated page layout including a navigation bar, welcome page and sidebar as well as a footer.
+4. Now create the files: __custom-theme/header.php__, __custom-theme/content.php__, __custom-theme/sidebar.php__, and __custom-theme/footer.php__.
+5. In __index.php__ add the function call `<?php wp_head(); ?>` just before the closing `</head>` tag.  
+```php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title><?php echo get_bloginfo('name'); ?></title>
+  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/style.css">
+  <?php wp_head(); ?>
+</head>
+<body>
+```
+6. In __index.php__ copy everything from `<!doctype>` all the way down to the closing `</header>` and paste it into __header.php__.  
+```php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title><?php echo get_bloginfo('name'); ?></title>
+  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/style.css">
+  <?php wp_head() ?>
+</head>
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="<?php echo get_bloginfo( 'wpurl' ); ?>"><?php echo get_bloginfo('name'); ?></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Blog</a>
+          </li>
+        </ul>
+      </div>
+    </div><!-- .container -->
+  </nav>
+</header>
+```  
+Notice I also added to the code above `<?php echo get_bloginfo( 'wpurl' ); ?>` into the href attribute for the navbar-brand link that shows our site title. This way when the user clicks our site title in the navbar it will head back to our site root (home page).
+
+7. Back in __index.php__ remove that code you copied into __header.php__ replacing it with `<?php get_header(); ?>`.
+8. In __index.php__ add the function call `<?php wp_footer(); ?>` just before the closing `</body>` tag.  
+```php
+    <script src="<?php echo get_bloginfo('template_directory'); ?>/js/jquery-3.2.1.slim.min.js"></script>
+    <script src="<?php echo get_bloginfo('template_directory'); ?>/js/popper.min.js"></script>
+    <script src="<?php echo get_bloginfo('template_directory'); ?>/js/bootstrap.min.js"></script>
+    <script src="<?php echo get_bloginfo('template_directory'); ?>/js/app.js"></script>
+    <?php wp_footer(); ?>
+</body>
+</html>
+```
+9. In __index.php__ copy everything from `<footer>` all the way down to the closing `</html>` and paste it into __footer.php__.  
+```php
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <small>&copy; 2017 Jonathan Grover. All Rights Reserved.</small>
+      </div><!-- .col -->
+    </div><!-- .row -->
+  </div><!-- .container -->
+</footer>
+
+<script src="<?php echo get_bloginfo('template_directory'); ?>/js/jquery-3.2.1.slim.min.js"></script>
+<script src="<?php echo get_bloginfo('template_directory'); ?>/js/popper.min.js"></script>
+<script src="<?php echo get_bloginfo('template_directory'); ?>/js/bootstrap.min.js"></script>
+<script src="<?php echo get_bloginfo('template_directory'); ?>/js/app.js"></script>
+<?php wp_footer(); ?>
+</body>
+</html>
+```
+10. Back in __index.php__ remove that code you copied into __footer.php__ replacing it with `<?php get_footer(); ?>`.
+11. In __index.php__ delete all the content inside of `<section>` element and replace with this:    
+```php
+<section class="col-md-9">
+  <?php if ( have_posts() ) : while ( have_posts() ) : the_post();
+    get_template_part( 'content', get_post_format() );
+  endwhile; endif; ?>
+</section>
+```  
+This will check if there are posts and if there are, it will loop over them and display them in this space.
+12. Now in __content.php__ add the following skeleton for each blog post:  
+```php
+<article id="post-<?php the_ID(); ?>">
+	<h2><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
+	<small><?php the_date(); ?> by <?php the_author(); ?></small>
+  <?php the_content(); ?>
+</article>
+```
+13. In __index.php__ copy all the code from `<aside class="col-md-3">` to the closing `</aside>` and paste it into __sidebar.php__.  
+```php
+<aside class="col-md-3">
+  <h4>Archives</h4>
+  <ul class="nav flex-column">
+    <?php wp_get_archives( 'type=monthly' ); ?>
+  </ul>
+</aside>
+```  
+Here we also removed all the `<li>` elements and are replacing it with dynamic code `<?php wp_get_archives( 'type=monthly' ); ?>` as well as a few `<h4>` to title the Archives list.
+
+14. Back in __index.php__ remove that code you copied into __sidebar.php__ replacing it with `<?php get_sidebar(); ?>`.
+15. After refreshing the page in the browser it should still look the same but the welcome box is now showing the Hello World post that WordPress creates for us when we first install it. Our sidebar now shows the about description and Archive month list.
+
+## Custom Menu Locations
+
+1. Create a __functions.php__ file in the root directory of your theme $ `touch functions.php`.
+2. Inside __functions.php__ add the following code to register a new menu locations:  
+```php
+<?php
+function register_my_menus() {
+  register_nav_menus(array(
+		'header-menu' => 'Header Menu'
+	));
+}
+add_action( 'init', 'register_my_menus' );
+?>
+```
+3. Add the first Menu Location in the __header.php__ by replacing the dummy `<li>` with the function `wp_nav_menu(array('theme_location' => 'header-menu'))` like so:  
+```php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title><?php echo get_bloginfo('name'); ?></title>
+  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/style.css">
+  <?php wp_head() ?>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand active" href="<?php echo get_bloginfo( 'wpurl' ); ?>"><?php echo get_bloginfo('name'); ?></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <?php wp_nav_menu(array('theme_location' => 'header-menu')); ?>
+          </ul>
+        </div>
+      </div><!-- .container -->
+    </nav>
+  </header>
+```
+4. Then in __css/style.css__ add the following code to re-style the links:  
+```css
+.menu {
+  list-style: none;
+  padding-left: 0;
+}
+
+.menu-item a {
+    display: inline-block;
+    padding: .5rem 1rem;
+}
+
+.navbar-nav .menu-item a {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.navbar-light .navbar-nav .menu-item a {
+    color: rgba(0,0,0,.5);
+}
+
+.navbar-light .navbar-nav .menu-item a:hover {
+    color: rgba(0,0,0,.7);
+    text-decoration: none;
+}
+
+.navbar-light .navbar-brand.active, .navbar-light .navbar-nav .menu-item a.active, .nav .menu-item a.active {
+  color: darkblue;
+}
+
+@media (min-width: 992px) {
+  .menu-item {
+    display: inline-block;
+  }
+  .navbar-expand-lg .navbar-nav .menu-item a {
+    padding-right: .5rem;
+    padding-left: .5rem;
+  }
+}
+```
+5. Next in the browser head into the Admin dashboard and build a menu by going to Appearance>Menus and create a new menu assigning its location to Header Menu. Add your pages as desired. I created four pages: Home, About, Contact, and Blog. Save the Menu and refresh the browser page at localhost and your Header Navigation should appear.
+
+## Creating Pages Layout
+
+1. Next create a __custome-theme/page.php__ file in the themes root folder allowing Pages to have a different layout From blog Post pages. For instance we will have only single columns in our Pages vs 2 columns as we see now in our Posts. In __page.php__ insert this code:  
+```php
+<?php get_header(); ?>
+
+  <main>
+    <div class="container">
+
+      <div class="row">
+        <section class="col">
+          <?php while ( have_posts() ) : the_post(); ?>
+
+            <article>
+              <h2><?php the_title(); ?></h2>
+              <?php the_content(); ?>
+            </article>
+
+    			<?php endwhile; ?>
+        </section>
+      </div><!-- .row -->
+    </div><!-- .container -->
+  </main>
+
+<?php get_footer(); ?>
+```
+2. Now links in the Header Menu should navigate to each page when clicked.

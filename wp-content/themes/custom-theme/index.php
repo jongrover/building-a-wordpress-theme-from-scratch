@@ -1,18 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title><?php echo get_bloginfo('name'); ?></title>
-  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/bootstrap.min.css">
-  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/style.css">
-</head>
-<body>
-  <h1><?php echo get_bloginfo('name'); ?></h1>
-  <script src="<?php echo get_bloginfo('template_directory'); ?>/js/jquery-3.2.1.slim.min.js"></script>
-  <script src="<?php echo get_bloginfo('template_directory'); ?>/js/popper.min.js"></script>
-  <script src="<?php echo get_bloginfo('template_directory'); ?>/js/bootstrap.min.js"></script>
-  <script src="<?php echo get_bloginfo('template_directory'); ?>/js/app.js"></script>
-</body>
-</html>
+<?php get_header(); ?>
+
+  <main>
+    <div class="container">
+
+      <div class="row">
+
+        <section class="col-md-9">
+          <?php if ( have_posts() ) : while ( have_posts() ) : the_post();
+    				get_template_part( 'content', get_post_format() );
+    			endwhile; endif; ?>
+        </section>
+
+        <?php get_sidebar(); ?>
+
+      </div><!-- .row -->
+    </div><!-- .container -->
+  </main>
+
+<?php get_footer(); ?>
