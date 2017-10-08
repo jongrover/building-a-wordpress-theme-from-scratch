@@ -464,3 +464,38 @@ add_action( 'init', 'register_my_menus' );
 <?php get_footer(); ?>
 ```
 2. Now links in the Header Menu should navigate to each page when clicked.
+
+## Set Static Homepage.
+
+1. Previously I created four pages: Home, About, Contact, and Blog; now we would like to set a static home page and have our blog posts show up under the blog page instead. In the browser in the Admin Dashboard view head to Settings>Reading and under _Front page displays_ heading select the radio button for _static page_, and under _Front page_ I will select _Home_ a page I created previously. Under _Posts page_ I will select _Blog_ a blank page I created previously.
+
+## Create Custom Wiget Areas
+
+1. In __functions.php__ add the following code:  
+```php
+function register_my_wigets() {
+  register_sidebar(array(
+    'name' => 'Sidebar',
+    'id' => 'sidebar-1',
+		'description'   => 'Custom Sidebar Widget',
+    'before_widget' => '<div class="sidebar-widget">',
+    'after_widget' => '</div>',
+    'before_title' => '<h4>',
+    'after_title' => '</h4>',
+  ));
+}
+add_action( 'widgets_init', 'register_my_wigets' );
+```
+2. In __sidebar.php__ remove the code inside `<aside>`...`</aside>` and add the following code in its place:  
+```php
+<aside class="col-md-3">
+  <?php if (is_active_sidebar('sidebar-1')) {
+    dynamic_sidebar('sidebar-1');
+  } ?>
+</aside>
+```
+3. Now in the browser head to Appearance>Widgets and drag a Wiget such as Archives to the new widget area labeled Sidebar. Now in the user facing view of the side you should see the Wiget location appearing at in the sidebar of the blog link.
+
+## ...
+
+1. ...

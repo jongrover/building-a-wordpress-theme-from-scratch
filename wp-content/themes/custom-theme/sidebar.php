@@ -1,6 +1,5 @@
 <aside class="col-md-3">
-  <h4>Archives</h4>
-  <ul class="nav flex-column">
-    <?php wp_get_archives( 'type=monthly' ); ?>
-  </ul>
+  <?php if (is_active_sidebar('sidebar-1')) {
+    dynamic_sidebar('sidebar-1');
+  } ?>
 </aside>
