@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title><?php echo get_bloginfo('name'); ?></title>
   <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/bootstrap.min.css">
-  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/style.css">
+  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/style.css">
   <?php wp_head() ?>
 </head>
 <body>

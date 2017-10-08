@@ -1,9 +1,17 @@
 /*
 Theme Name: Custom Theme
+Theme URI: https://github.com/jongrover/building-a-wordpress-theme-from-scratch
 Author: Jonathan Grover
-Description: Example Theme from Github Repo (https://github.com/jongrover/building-a-wordpress-theme-from-scratch)
+Author URI: https://jonathangrover.com
+Description: Example Theme from Github Repo
 Version: 0.0.1
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: bootstrap
+Text Domain: jongcustomtheme
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
 */
 
 header {
@@ -43,6 +51,11 @@ main {
 
 .navbar-light .navbar-brand.active, .navbar-light .navbar-nav .menu-item a.active, .nav .menu-item a.active {
   color: darkblue;
+}
+
+.sidebar-widget ul {
+  list-style: none;
+  padding-left: 0;
 }
 
 @media (min-width: 992px) {

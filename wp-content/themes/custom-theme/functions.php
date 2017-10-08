@@ -4,7 +4,7 @@ function register_my_menus() {
 		'header-menu' => 'Header Menu',
 	));
 }
-function register_my_wigets() {
+function register_my_widgets() {
   register_sidebar(array(
     'name' => 'Sidebar',
     'id' => 'sidebar-1',
@@ -16,5 +16,5 @@ function register_my_wigets() {
   ));
 }
 add_action( 'init', 'register_my_menus' );
-add_action( 'widgets_init', 'register_my_wigets' );
+add_action( 'widgets_init', 'register_my_widgets' );
 ?>

@@ -49,15 +49,23 @@ define('DB_COLLATE', '');
 1. In Terminal (or in code editor) head to the theme folder at __wp-content/themes/__ $ `cd wp-content/themes`.
 2. Create a new theme folder using Terminal $ `mkdir custom-theme` or via Atom by right clicking on the themes folder and select create new folder. Note: you can name your theme folder anything you like I choose custom-theme as a generic name for this example.
 3. Inside __custom-theme__ create a __css__ folder $ `mkdir custom-theme/css` and also create a _js__ folder $ `mkdir custom-theme/js`.
-4. Move into your custom theme folder $ `cd custom-theme` and create three files __index.php__ and __css/style.css__ and __js/app.js__$ `touch index.php css/style.css js/app.js`.
-5. In __css/style.css__ in your code editor add the following code:
+4. Move into your custom theme folder $ `cd custom-theme` and create three files __index.php__ and __css/style.css__ and __js/app.js__$ `touch index.php style.css js/app.js`. Note that we did not save style.css inside the css folder, although we will be putting Bootstrap css in our css folder later on, WordPress requires a style.css file to be located inside the root folder in order to gather theme details.
+5. In __style.css__ in your code editor add the following code:
 ```css
 /*
 Theme Name: Custom Theme
+Theme URI: https://github.com/jongrover/building-a-wordpress-theme-from-scratch
 Author: Jonathan Grover
-Description: Example Theme from Github Repo (https://github.com/jongrover/building-a-wordpress-theme-from-scratch)
+Author URI: https://jonathangrover.com
+Description: Example Theme from Github Repo
 Version: 0.0.1
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: bootstrap
+Text Domain: jongcustomtheme
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
 */
 
 h1 {
@@ -79,7 +87,7 @@ console.log('Hello from your theme!');
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title><?php echo get_bloginfo('name'); ?></title>
-  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/css/style.css">
+  <link rel="stylesheet" href="<?php echo get_bloginfo('template_directory'); ?>/style.css">
 </head>
 <body>
   <h1><?php echo get_bloginfo('name'); ?></h1>
@@ -469,11 +477,11 @@ add_action( 'init', 'register_my_menus' );
 
 1. Previously I created four pages: Home, About, Contact, and Blog; now we would like to set a static home page and have our blog posts show up under the blog page instead. In the browser in the Admin Dashboard view head to Settings>Reading and under _Front page displays_ heading select the radio button for _static page_, and under _Front page_ I will select _Home_ a page I created previously. Under _Posts page_ I will select _Blog_ a blank page I created previously.
 
-## Create Custom Wiget Areas
+## Create Custom Widget Areas
 
 1. In __functions.php__ add the following code:  
 ```php
-function register_my_wigets() {
+function register_my_widgets() {
   register_sidebar(array(
     'name' => 'Sidebar',
     'id' => 'sidebar-1',
@@ -484,7 +492,7 @@ function register_my_wigets() {
     'after_title' => '</h4>',
   ));
 }
-add_action( 'widgets_init', 'register_my_wigets' );
+add_action( 'widgets_init', 'register_my_widgets' );
 ```
 2. In __sidebar.php__ remove the code inside `<aside>`...`</aside>` and add the following code in its place:  
 ```php
@@ -494,7 +502,18 @@ add_action( 'widgets_init', 'register_my_wigets' );
   } ?>
 </aside>
 ```
-3. Now in the browser head to Appearance>Widgets and drag a Wiget such as Archives to the new widget area labeled Sidebar. Now in the user facing view of the side you should see the Wiget location appearing at in the sidebar of the blog link.
+3. In __style.css__ add the following code to style `<ul>` in your widgets:  
+```css
+.sidebar-widget ul {
+  list-style: none;
+  padding-left: 0;
+}
+```
+4. Now in the browser head to Appearance>Widgets and drag a Widget such as Archives to the new widget area labeled Sidebar. Now in the user facing view of the side you should see the Widget location appearing at in the sidebar of the blog link.
+
+## Create a Theme Screenshot
+
+1.  In a browser head to localhost and take a screenshot of one of your pages I choose my blog page. Then open the file in Photoshop and resize it to 880px x 660px and save it under the name __screenshot.png__ in the root of your custom theme folder in my case it is at __custom-theme/screenshot.png__. In the browser Admin Dashboard head to Appearance>Themes and you should see your thumbnail image appearing as well as all the details you included in your style.css file.
 
 ## ...
 
