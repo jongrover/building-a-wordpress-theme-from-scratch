@@ -465,7 +465,7 @@ add_action( 'init', 'register_my_menus' );
               <?php the_content(); ?>
             </article>
 
-    			<?php endwhile; ?>
+          <?php endwhile; ?>
         </section>
       </div><!-- .row -->
     </div><!-- .container -->
@@ -611,7 +611,7 @@ footer .row {
 
 .copyright {
   text-align: left;
-  color: #333;
+  color: #777;
 }
 
 [class$="-widget"] .menu-item, [class$="-widget"] .menu-item a {
