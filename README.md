@@ -209,7 +209,7 @@ Note that in our title element we put `<title><?php echo get_bloginfo('name'); ?
     <div class="container">
       <div class="row">
         <div class="col">
-          <p><small>&copy; 2017 Jonathan Grover. All Rights Reserved.</small></p>
+          <p class="copyright"><small>&copy; <?php echo date( 'Y' ); ?> <?php bloginfo( 'name' ); ?>, <?php bloginfo( 'description' ); ?>. All Rights Reserved.</small></p>
         </div><!-- .col -->
       </div><!-- .row -->
     </div><!-- .container -->
@@ -240,7 +240,7 @@ main {
 }
 ```
 3. Save all pages and refresh in the browser and you should see an updated page layout including a navigation bar, welcome page and sidebar as well as a footer.
-4. Now create the files: __custom-theme/header.php__, __custom-theme/content.php__, __custom-theme/sidebar.php__, and __custom-theme/footer.php__.
+4. Now create the files: __custom-theme/header.php__, __custom-theme/single.php__, __custom-theme/sidebar.php__, and __custom-theme/footer.php__.
 5. In __index.php__ add the function call `<?php wp_head(); ?>` just before the closing `</head>` tag.  
 ```php
 <!DOCTYPE html>
@@ -313,7 +313,7 @@ Notice I also added to the code above `<?php echo get_bloginfo( 'wpurl' ); ?>` i
   <div class="container">
     <div class="row">
       <div class="col">
-        <p><small>&copy; 2017 Jonathan Grover. All Rights Reserved.</small></p>
+        <p class="copyright"><small>&copy; <?php echo date( 'Y' ); ?> <?php bloginfo( 'name' ); ?>, <?php bloginfo( 'description' ); ?>. All Rights Reserved.</small></p>
       </div><!-- .col -->
     </div><!-- .row -->
   </div><!-- .container -->
@@ -332,12 +332,12 @@ Notice I also added to the code above `<?php echo get_bloginfo( 'wpurl' ); ?>` i
 ```php
 <section class="col-md-9">
   <?php if ( have_posts() ) : while ( have_posts() ) : the_post();
-    get_template_part( 'content', get_post_format() );
+    get_template_part( 'single', get_post_format() );
   endwhile; endif; ?>
 </section>
 ```  
 This will check if there are posts and if there are, it will loop over them and display them in this space.
-12. Now in __content.php__ add the following skeleton for each blog post:  
+12. Now in __single.php__ add the following skeleton for each blog post:  
 ```php
 <article id="post-<?php the_ID(); ?>">
 	<h2><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
@@ -506,7 +506,7 @@ add_action( 'widgets_init', 'register_my_widgets' );
 ```
 3. In __style.css__ add the following code to style `<ul>` in your widgets:  
 ```css
-.sidebar-widget ul {
+[class="-widget"] ul {
   list-style: none;
   padding-left: 0;
 }
@@ -590,7 +590,7 @@ function register_my_widgets() {
     </div>
     <div class="row">
       <div class="col">
-        <p><small>&copy; 2017 Jonathan Grover. All Rights Reserved.</small></p>
+        <p class="copyright"><small>&copy; <?php echo date( 'Y' ); ?> <?php bloginfo( 'name' ); ?>, <?php bloginfo( 'description' ); ?>. All Rights Reserved.</small></p>
       </div><!-- .col -->
     </div><!-- .row -->
   </div><!-- .container -->
@@ -688,8 +688,8 @@ comment_form();
 
 ## Create a Theme Screenshot
 
-1.  In a browser head to localhost and take a screenshot of one of your pages I choose my Home page. Then open the file in Photoshop and resize it to 880px x 660px and save it under the name __screenshot.png__ in the root of your custom theme folder in my case it is at __custom-theme/screenshot.png__. In the browser Admin Dashboard head to Appearance>Themes and you should see your thumbnail image appearing as well as all the details you included in your style.css file.
+1.  In a browser head to localhost and take a screenshot of one of your pages I choose my Home page. Screenshots should follow 4:3 aspect ratio and be a maximum of 1200px x 900px in size. In our case we're going to open the file in Photoshop and resize it to 880px x 660px. Then save it under the name __screenshot.png__ in the root of your custom theme folder in my case it is at __custom-theme/screenshot.png__. In the browser Admin Dashboard head to Appearance>Themes and you should see your thumbnail image appearing as well as all the details you included in your style.css file.
 
-## Adding Customizable Theme Areas
+## Creating Custom User Theme Controls
 
 1. ...

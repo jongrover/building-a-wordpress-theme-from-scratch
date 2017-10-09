@@ -24,7 +24,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <p class="copyright"><small>&copy; 2017 Jonathan Grover. All Rights Reserved.</small></p>
+          <p class="copyright"><small>&copy; <?php echo date( 'Y' ); ?> <?php bloginfo( 'name' ); ?>, <?php bloginfo( 'description' ); ?>. All Rights Reserved.</small></p>
         </div><!-- .col -->
       </div><!-- .row -->
     </div><!-- .container -->
