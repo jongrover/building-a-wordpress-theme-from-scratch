@@ -723,3 +723,35 @@ function apply_my_customizations() {
 add_action( 'wp_head', 'apply_my_customizations');
 ```
 2. Now head to the browser under Appearance>Customize there should be a new section labeled Colors, and inside it you hsould be able to update the header color. For more information on Customizations see the docs on  [Theme_Customization_API](https://codex.wordpress.org/Theme_Customization_API) and [browse some example code](https://codex.wordpress.org/Plugin_API/Action_Reference/customize_register#Examples). For an explantion of the `__()` function [see this reference](https://developer.wordpress.org/reference/functions/__/).
+
+## Insert Default Pages
+
+See the documentation on [Template File Name List](https://codex.wordpress.org/Theme_Development#Template_Files_List) to discover default names. It is recommended to create additional files such as 404.php, category.php, tag.php, author.php, attachment.php, image.php, etc.
+
+## Resources
+
+- [https://developer.mozilla.org/en-US/docs/Web/HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+- [https://developer.mozilla.org/en-US/docs/Web/CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [https://developer.mozilla.org/en-US/docs/Web/JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [http://jquery.com/](http://jquery.com/)
+- [https://popper.js.org/](https://popper.js.org/)
+- [http://getbootstrap.com/](http://getbootstrap.com/)
+- [http://php.net/manual/en/](http://php.net/manual/en/)
+- [https://wordpress.org/](https://wordpress.org/)
+- [https://codex.wordpress.org/](https://codex.wordpress.org/)
+
+## License
+
+The MIT License (MIT)
+
+Copyright (c) 2017 Jonathan Grover
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+## Contact
+
+[hello@jonathangrover.com](mailto:hello@jonathangrover.com)
