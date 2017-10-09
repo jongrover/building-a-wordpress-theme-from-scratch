@@ -726,7 +726,7 @@ add_action( 'wp_head', 'apply_my_customizations');
 
 ## Insert Default Pages
 
-See the documentation on [Template File Name List](https://codex.wordpress.org/Theme_Development#Template_Files_List) to discover default names. It is recommended to create additional files such as 404.php, category.php, tag.php, author.php, attachment.php, image.php, etc.
+See the documentation on [Template File Name List](https://codex.wordpress.org/Theme_Development#Template_Files_List) to discover default names. It is recommended to create additional files such as: __404.php__, __category.php__, __tag.php__, __author.php__, __attachment.php__, __image.php__, etc.
 
 ## Resources
 
