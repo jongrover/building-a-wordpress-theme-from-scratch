@@ -367,8 +367,8 @@ Here we also removed all the `<li>` elements and are replacing it with dynamic c
 <?php
 function register_my_menus() {
   register_nav_menus(array(
-		'header-menu' => 'Header Menu'
-	));
+    'header-menu' => 'Header Menu'
+  ));
 }
 add_action( 'init', 'register_my_menus' );
 ?>
