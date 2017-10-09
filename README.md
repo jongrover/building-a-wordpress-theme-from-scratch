@@ -337,6 +337,7 @@ Notice I also added to the code above `<?php echo get_bloginfo( 'wpurl' ); ?>` i
 </section>
 ```  
 This will check if there are posts and if there are, it will loop over them and display them in this space.
+
 12. Now in __single.php__ add the following skeleton for each blog post:  
 ```php
 <article id="post-<?php the_ID(); ?>">
@@ -726,7 +727,7 @@ add_action( 'wp_head', 'apply_my_customizations');
 
 ## Insert Default Pages
 
-See the documentation on [Template File Name List](https://codex.wordpress.org/Theme_Development#Template_Files_List) to discover default names. It is recommended to create additional files such as: __404.php__, __category.php__, __tag.php__, __author.php__, __attachment.php__, __image.php__, etc.
+1. See the documentation on [Template File Name List](https://codex.wordpress.org/Theme_Development#Template_Files_List) to discover default names. It is recommended to create additional files such as: __404.php__, __category.php__, __tag.php__, __author.php__, __attachment.php__, __image.php__, etc.
 
 ## Resources
 
