@@ -518,7 +518,7 @@ function register_my_widgets() {
   register_sidebar(array(
     'name' => 'Sidebar',
     'id' => 'sidebar-1',
-		'description'   => 'Custom Sidebar Widget',
+    'description'   => 'Custom Sidebar Widget',
     'before_widget' => '<div class="sidebar-widget">',
     'after_widget' => '</div>',
     'before_title' => '<h4>',
