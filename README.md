@@ -695,23 +695,23 @@ comment_form();
 1. In __functions.php__ include the following code which will allow us to style the text color of `<h1>` elements:  
 ```php
 function register_my_customizations( $wp_customize ) {
-   // setting
-   $wp_customize->add_setting( 'header_color' , array(
+  // setting
+  $wp_customize->add_setting( 'header_color' , array(
     'default'   => '#000000',
     'transport' => 'refresh',
-    ));
-    // section
-    $wp_customize->add_section( 'colors' , array(
-      'title'      => __( 'Colors', 'custom_theme' ),
-      'priority'   => 30,
-    ));
-    // control
-    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_color', array(
-    	 'label'      => __( 'Header Color', 'custom_theme' ),
-  	   'section'    => 'colors',
-  	   'settings'   => 'header_color',
-     ))
-    );
+  ));
+  // section
+  $wp_customize->add_section( 'colors' , array(
+    'title'      => __( 'Colors', 'custom_theme' ),
+    'priority'   => 30,
+  ));
+  // control
+  $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_color', array(
+    'label'      => __( 'Header Color', 'custom_theme' ),
+    'section'    => 'colors',
+    'settings'   => 'header_color',
+   )
+  ));
 }
 add_action( 'customize_register', 'register_my_customizations' );
 
