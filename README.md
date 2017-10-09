@@ -722,3 +722,4 @@ function apply_my_customizations() {
 }
 add_action( 'wp_head', 'apply_my_customizations');
 ```
+2. Now head to the browser under Appearance>Customize there should be a new section labeled Colors, and inside it you hsould be able to update the header color. For more information on Customizations see the docs on  [Theme_Customization_API](https://codex.wordpress.org/Theme_Customization_API) and [browse some example code](https://codex.wordpress.org/Plugin_API/Action_Reference/customize_register#Examples)
