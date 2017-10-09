@@ -527,7 +527,7 @@ function register_my_widgets() {
   register_sidebar(array(
     'name' => 'Footer 1',
     'id' => 'footer-1',
-		'description'   => 'Custom Footer Widget',
+    'description'   => 'Custom Footer Widget',
     'before_widget' => '<div class="footer-widget">',
     'after_widget' => '</div>',
     'before_title' => '<h4>',
@@ -536,7 +536,7 @@ function register_my_widgets() {
   register_sidebar(array(
     'name' => 'Footer 2',
     'id' => 'footer-2',
-		'description'   => 'Custom Footer Widget',
+    'description'   => 'Custom Footer Widget',
     'before_widget' => '<div class="footer-widget">',
     'after_widget' => '</div>',
     'before_title' => '<h4>',
@@ -545,7 +545,7 @@ function register_my_widgets() {
   register_sidebar(array(
     'name' => 'Footer 3',
     'id' => 'footer-3',
-		'description'   => 'Custom Footer Widget',
+    'description'   => 'Custom Footer Widget',
     'before_widget' => '<div class="footer-widget">',
     'after_widget' => '</div>',
     'before_title' => '<h4>',
@@ -554,7 +554,7 @@ function register_my_widgets() {
   register_sidebar(array(
     'name' => 'Footer 4',
     'id' => 'footer-4',
-		'description'   => 'Custom Footer Widget',
+    'description'   => 'Custom Footer Widget',
     'before_widget' => '<div class="footer-widget">',
     'after_widget' => '</div>',
     'before_title' => '<h4>',
