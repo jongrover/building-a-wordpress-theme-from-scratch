@@ -55,20 +55,31 @@ function register_my_widgets() {
 }
 add_action( 'widgets_init', 'register_my_widgets' );
 
-function theme_footer_customizer($wp_customize) {
- //adding section in wordpress customizer
-  $wp_customize->add_section('footer_settings_section', array(
-    'title'          => 'Footer Text Section'
-   ));
-  //adding setting for footer text area
-  $wp_customize->add_setting('text_setting', array(
-   'default'        => 'Default Text For Footer Section',
-   ));
-  $wp_customize->add_control('text_setting', array(
-   'label'   => 'Footer Text Here',
-    'section' => 'footer_settings_section',
-   'type'    => 'textarea',
-  ));
+function register_my_customizations( $wp_customize ) {
+   // setting
+   $wp_customize->add_setting( 'header_color' , array(
+    'default'   => '#000000',
+    'transport' => 'refresh',
+    ));
+    // section
+    $wp_customize->add_section( 'colors' , array(
+      'title'      => __( 'Colors', 'custom_theme' ),
+      'priority'   => 30,
+    ));
+    // control
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_color', array(
+    	 'label'      => __( 'Header Color', 'custom_theme' ),
+  	   'section'    => 'colors',
+  	   'settings'   => 'header_color',
+     ))
+    );
 }
-add_action('customize_register', 'theme_footer_customizer');
+add_action( 'customize_register', 'register_my_customizations' );
+
+function apply_my_customizations() {
+  echo '<style type="text/css">'.
+          'h1 { color: '.get_theme_mod('header_color','#000000').'; }'.
+       '</style>';
+}
+add_action( 'wp_head', 'apply_my_customizations');
 ?>

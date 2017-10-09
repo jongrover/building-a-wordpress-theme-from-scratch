@@ -47,9 +47,9 @@ define('DB_COLLATE', '');
 ## Creating A Custom Theme
 
 1. In Terminal (or in code editor) head to the theme folder at __wp-content/themes/__ $ `cd wp-content/themes`.
-2. Create a new theme folder using Terminal $ `mkdir custom-theme` or via Atom by right clicking on the themes folder and select create new folder. Note: you can name your theme folder anything you like I choose custom-theme as a generic name for this example.
-3. Inside __custom-theme__ create a __css__ folder $ `mkdir custom-theme/css` and also create a _js__ folder $ `mkdir custom-theme/js`.
-4. Move into your custom theme folder $ `cd custom-theme` and create three files __index.php__ and __style.css__ and __js/app.js__$ `touch index.php style.css js/app.js`. Note that we did not save style.css inside the css folder, although we will be putting Bootstrap css in our css folder later on, WordPress requires a style.css file to be located inside the root folder in order to gather theme details.
+2. Create a new theme folder using Terminal $ `mkdir custom_theme` or via Atom by right clicking on the themes folder and select create new folder. Note: you can name your theme folder anything you like I choose custom_theme as a generic name for this example.
+3. Inside __custom_theme__ create a __css__ folder $ `mkdir custom_theme/css` and also create a _js__ folder $ `mkdir custom_theme/js`.
+4. Move into your custom theme folder $ `cd custom_theme` and create three files __index.php__ and __style.css__ and __js/app.js__$ `touch index.php style.css js/app.js`. Note that we did not save style.css inside the css folder, although we will be putting Bootstrap css in our css folder later on, WordPress requires a style.css file to be located inside the root folder in order to gather theme details.
 5. In __style.css__ in your code editor add the following code:
 ```css
 /*
@@ -108,7 +108,7 @@ Note that in our title element we put `<title><?php echo get_bloginfo('name'); ?
 2. Next download [jQuery](https://code.jquery.com/jquery-3.2.1.slim.min.js) a Bootstrap dependency.
 3. Also download [Popper](https://gist.github.com/FezVrasta/16c5d5e5ff1211922ddcf090c8454d74/archive/9372bdf66f7d899a5daaf0ff06ff89be92561c83.zip) another Bootstrap dependency.
 4. After all downloads finish unzip them and move all CSS into your projects __css__ folder and move all JS files into your __js__ folder.
-5. Now let's link to these new files for Bootstrap in our __index.php__ file in the root of our theme folder __custom-theme/index.php__. Here We'll link to the files the same way we linked to our __style.css__ and __app.js__.  
+5. Now let's link to these new files for Bootstrap in our __index.php__ file in the root of our theme folder __custom_theme/index.php__. Here We'll link to the files the same way we linked to our __style.css__ and __app.js__.  
 ```php
 <!DOCTYPE html>
 <html lang="en">
@@ -133,7 +133,7 @@ Note that in our title element we put `<title><?php echo get_bloginfo('name'); ?
 
 ## Dividing Page Layout
 
-1. Let's start by building our layout in __custom-theme/index.php__ and later we'll break it into separate PHP files. Here is my layout code:  
+1. Let's start by building our layout in __custom_theme/index.php__ and later we'll break it into separate PHP files. Here is my layout code:  
 ```php
 <!DOCTYPE html>
 <html lang="en">
@@ -222,7 +222,7 @@ Note that in our title element we put `<title><?php echo get_bloginfo('name'); ?
 </body>
 </html>
 ```
-2. Then in __custom-theme/style.css__ add the code:  
+2. Then in __custom_theme/style.css__ add the code:  
 ```css
 header {
   position: fixed;
@@ -240,7 +240,7 @@ main {
 }
 ```
 3. Save all pages and refresh in the browser and you should see an updated page layout including a navigation bar, welcome page and sidebar as well as a footer.
-4. Now create the files: __custom-theme/header.php__, __custom-theme/single.php__, __custom-theme/sidebar.php__, and __custom-theme/footer.php__.
+4. Now create the files: __custom_theme/header.php__, __custom_theme/single.php__, __custom_theme/sidebar.php__, and __custom_theme/footer.php__.
 5. In __index.php__ add the function call `<?php wp_head(); ?>` just before the closing `</head>` tag.  
 ```php
 <!DOCTYPE html>
@@ -340,7 +340,7 @@ This will check if there are posts and if there are, it will loop over them and 
 12. Now in __single.php__ add the following skeleton for each blog post:  
 ```php
 <article id="post-<?php the_ID(); ?>">
-	<h2><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
+	<h1><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
 	<small><?php the_date(); ?> by <?php the_author(); ?></small>
   <?php the_content(); ?>
 </article>
@@ -461,7 +461,7 @@ add_action( 'init', 'register_my_menus' );
           <?php while ( have_posts() ) : the_post(); ?>
 
             <article>
-              <h2><?php the_title(); ?></h2>
+              <h1><?php the_title(); ?></h1>
               <?php the_content(); ?>
             </article>
 
@@ -688,8 +688,37 @@ comment_form();
 
 ## Create a Theme Screenshot
 
-1.  In a browser head to localhost and take a screenshot of one of your pages I choose my Home page. Screenshots should follow 4:3 aspect ratio and be a maximum of 1200px x 900px in size. In our case we're going to open the file in Photoshop and resize it to 880px x 660px. Then save it under the name __screenshot.png__ in the root of your custom theme folder in my case it is at __custom-theme/screenshot.png__. In the browser Admin Dashboard head to Appearance>Themes and you should see your thumbnail image appearing as well as all the details you included in your style.css file.
+1.  In a browser head to localhost and take a screenshot of one of your pages I choose my Home page. Screenshots should follow 4:3 aspect ratio and be a maximum of 1200px x 900px in size. In our case we're going to open the file in Photoshop and resize it to 880px x 660px. Then save it under the name __screenshot.png__ in the root of your custom theme folder in my case it is at __custom_theme/screenshot.png__. In the browser Admin Dashboard head to Appearance>Themes and you should see your thumbnail image appearing as well as all the details you included in your style.css file.
 
 ## Creating Custom User Theme Controls
 
-1. ...
+1. In __functions.php__ include the following code which will allow us to style the text color of `<h1>` elements:  
+```php
+function register_my_customizations( $wp_customize ) {
+   // setting
+   $wp_customize->add_setting( 'header_color' , array(
+    'default'   => '#000000',
+    'transport' => 'refresh',
+    ));
+    // section
+    $wp_customize->add_section( 'colors' , array(
+      'title'      => __( 'Colors', 'custom_theme' ),
+      'priority'   => 30,
+    ));
+    // control
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_color', array(
+    	 'label'      => __( 'Header Color', 'custom_theme' ),
+  	   'section'    => 'colors',
+  	   'settings'   => 'header_color',
+     ))
+    );
+}
+add_action( 'customize_register', 'register_my_customizations' );
+
+function apply_my_customizations() {
+  echo '<style type="text/css">'.
+          'h1 { color: '.get_theme_mod('header_color','#000000').'; }'.
+       '</style>';
+}
+add_action( 'wp_head', 'apply_my_customizations');
+```
