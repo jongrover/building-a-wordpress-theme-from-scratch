@@ -725,9 +725,176 @@ add_action( 'wp_head', 'apply_my_customizations');
 ```
 2. Now head to the browser under Appearance>Customize there should be a new section labeled Colors, and inside it you hsould be able to update the header color. For more information on Customizations see the docs on  [Theme_Customization_API](https://codex.wordpress.org/Theme_Customization_API) and [browse some example code](https://codex.wordpress.org/Plugin_API/Action_Reference/customize_register#Examples). For an explantion of the `__()` function [see this reference](https://developer.wordpress.org/reference/functions/__/).
 
-## Insert Default Pages
+## Custom Page Template Files
 
-1. See the documentation on [Template File Name List](https://codex.wordpress.org/Theme_Development#Template_Files_List) to discover default names. It is recommended to create additional files such as: __404.php__, __category.php__, __tag.php__, __author.php__, __attachment.php__, __image.php__, etc.
+1. Create a sub folder in your theme called __page-templates__.
+1. Duplicate __page.php__ into the __page-templates__ folder and give it a name that is not [already reserved by WordPress](https://codex.wordpress.org/Theme_Development#Template_Files_List). I called mine __include-sidebar.php__.
+2. Add the following code as a PHP comment at the top of the file:  
+```php
+/*
+ * Template Name: Include Sidebar
+ * Description: Page template with sidebar included.
+ */
+ ```  
+ The name under Template Name is what will be displayed under Page Attributes in the WordPress editor.
+
+ 3. Then I changed the previous layout, adding in the `get_sidebar()` function and changing the column classes to reflect a nine column beside a three column sidebar:  
+ ```php
+ <?php
+ /*
+  * Template Name: Include Sidebar
+  * Description: Page template with sidebar included.
+  */
+
+ get_header();
+ ?>
+
+   <main>
+     <div class="container">
+
+       <div class="row">
+         <section class="col-md-9">
+           <?php while ( have_posts() ) : the_post(); ?>
+
+             <article>
+               <h1><?php the_title(); ?></h1>
+               <?php the_content(); ?>
+             </article>
+
+     			<?php endwhile; ?>
+           <?php if (comments_open() || get_comments_number()) {
+             comments_template();
+           } ?>
+         </section>
+
+         <?php get_sidebar(); ?>
+
+       </div><!-- .row -->
+     </div><!-- .container -->
+   </main>
+
+ <?php get_footer(); ?>
+ ```
+ 4. Now to test our template, head back to the browser and under the Admin Dashboard click Pages > All Pages. Click to edit a page and now under Page Attributes there should now be a Template menu where you can select between Default Template (page.php) or Include Sidebar (page-templates/include-sidebar.php).
+
+## Advanced Custom Fields
+
+Custom fields can be added both using raw code in either the functions.php file, as custom plugin code, or using a pre-created plugin such as [Advanced Custom Fields Plugin](https://www.advancedcustomfields.com). Below I demonstrate creating custom fields using a pre-made plugin. If you are interested to build this by writing your own code from scratch you can refer to the [tutorial here](http://blog.teamtreehouse.com/adding-custom-fields-to-a-custom-post-type-the-right-way) instead. I teach using the plugin so the end user can update custom fields without having to write any code.
+
+1. Start by installing the [Advanced Custom Fields Plugin](https://www.advancedcustomfields.com) under Plugins > Add New then search for Advanced Custom Fields, find the plugin by By Elliot Condon, click Install and then Activate.
+2. Next, click the new Custom Fields link from the left side Navigation in the Admin Dashboard.
+3. Click Add New, and under New Field Group give it a name I called mine `Blurbs`. Then click the Add Field button.
+4. Name the new field under Field Label `About Blurb`.
+5. Set the field type as Text.
+6. Write a description for users to understand what this field is for using the Field Instructions area. I wrote: `Set this to add about text to pages using the include sidebar page template.`
+7. Under location set a rule such as Page template is equal to Include Sidebar.
+8. Click Publish.
+9. Now to place the field content in the file __page-templates/include-sidebar.php__ remove the sidebar code and add in the custom field to display using the `get_field('about_blurb')` function like so:  
+```php
+<?php
+/*
+ * Template Name: Include Sidebar
+ * Description: Page template with sidebar included.
+ */
+
+get_header();
+?>
+
+  <main>
+    <div class="container">
+
+      <div class="row">
+        <section class="col-md-9">
+          <?php while ( have_posts() ) : the_post(); ?>
+
+            <article>
+              <h1><?php the_title(); ?></h1>
+              <?php the_content(); ?>
+            </article>
+
+    			<?php endwhile; ?>
+          <?php if (comments_open() || get_comments_number()) {
+            comments_template();
+          } ?>
+        </section>
+
+        <aside class="col-md-3">
+          <?php if(get_field('about_blurb')) {
+  	        echo '<p>'.get_field('about_blurb').'</p>';
+          } ?>
+        </aside>
+      </div><!-- .row -->
+    </div><!-- .container -->
+  </main>
+
+<?php get_footer(); ?>
+```
+10. To test head to Pages > Edit a page and under Page Attributes set Template to Include Sidebar. Below should appear a text input field to type some content for our About Blurb. Whatever text and HTML content you type here will appear inside the sidebar area.
+
+## Custom Post Types
+
+WordPress provides us with Posts and Pages but what if I want to create Products, Recipes, Portfolios, or some other custom content in my site. For this we can use Custom Post Types.
+
+Can be created using a plugin or by coding it from scratch into the __functions.php__ file as detailed in the [tutorial here](http://www.wpbeginner.com/wp-tutorials/how-to-create-custom-post-types-in-wordpress/). The instructions below describe the process using the Plugin which gives the end user more control over these  post types without needing to code them from scratch. [This article](http://www.wpbeginner.com/opinion/wordpress-custom-post-types-debate-functions-php-or-plugins/) describes the pros and cons of each method.
+
+1. Under Plugins > Add New, search for Custom Post Type UI.
+2. Find the plugin by WebDevStudios and click to Install and then Activate it.
+3. In the newly created left hand navigation link (in Admin Dashboard) click on CPT UI > Add/Edit Post Types.
+4. Under slug put `product`.
+5. For Singular Label put `Product` and plural label put `Products`.
+6. Under Has Archive select `true` so that we will be able to access a list of all products from the `/product/` URL.
+7. Under Supports check the boxes for anything you'd like to include on Product pages. In my case I checked Custom Fields so I can include a Price.
+8. Fill out any other options you desire and then click Add Post Type button.
+9. Refresh the page and you should now see a Products link. Click Products > Add New. Type a name for the product `Baseball` and in the description write `A baseball, good condition!`.
+10. Click Publish button to publish this product.
+11. To display this product let's head to Appearance > Menus and select Header Menu.
+12. Under Custom Links, for URL put `/product/` then for Link Text put `Products` and click Add to Menu button, and then click the Save menu button.
+13. To test head to the browser and click the Products link from the Header Menu. Your Baseball Product should be listed there.
+14. Got to Custom Fields > Field Group, Add New.
+15. Name the Field Group `Products` and then click Add Field button.
+16. Set the field label to `Price` and the field name to `_price`, field type to `Number`, required `Yes`, default value `0`, step size `1`.
+17. Set Location to `Post Type` is equal to `product` and then click Publish button. Now our custom post type of Product has a custom Price field.
+18. Next let's create a page layout unique to products by duplicating the index.php file and name it __archive-product.php__.
+19. In the __archive-product.php__ file remove the sidebar and column classes and change the `get_template_part( 'single', get_post_format() )` to `get_template_part( 'single', 'product', get_post_format() )`. Following is the full code for this page:  
+```php
+<?php get_header(); ?>
+
+  <main>
+    <div class="container">
+
+      <div class="row">
+
+        <section class="col">
+          <?php if ( have_posts() ) : while ( have_posts() ) : the_post();
+    				get_template_part( 'single', 'product', get_post_format() );
+    			endwhile; endif;
+
+          if (comments_open() || get_comments_number()) {
+            comments_template();
+          } ?>
+        </section>
+
+      </div><!-- .row -->
+    </div><!-- .container -->
+  </main>
+
+<?php get_footer(); ?>
+```
+20. Next duplicate __single.php__ and name it __single-product.php__.
+21. In __single-product.php__ change the code to the following:  
+```php
+<?php setup_postdata( $post ); ?>
+<article id="post-<?php the_ID(); ?>">
+	<h1><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+  <p><?php the_content(); ?></p>
+	<p><?php echo "Price: $".get_field('_price').".00"; ?></p>
+</article>
+```
+22. To test click the Products link to view all products which will now display our custom layout as well as our custom Price field.
+
+## Default Template Files
+
+1. See the documentation on [Template File Name List](https://codex.wordpress.org/Theme_Development#Template_Files_List) to discover default names. It is recommended to create all template files such as: __404.php__, __category.php__, __archive.php__, __tag.php__, __author.php__, __attachment.php__, __image.php__, etc. then style them to your liking.
 
 ## Resources
 
