@@ -347,20 +347,19 @@ This will check if there are posts and if there are, it will loop over them and 
 
       <div class="row">
         <section class="col">
-					<article id="post-<?php the_ID(); ?>">
+          <article id="post-<?php the_ID(); ?>">
 						<h1><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
 						<small><?php the_date(); ?> by <?php the_author(); ?></small>
 					  <?php the_content(); ?>
 					</article>
-					<?php if (comments_open() || get_comments_number()) {
-						comments_template();
-					} ?>
+					<?php if (comments_open() || get_comments_number()) { comments_template(); } ?>
 				</section>
 			</div><!-- .row -->
 		</div><!-- .container -->
 	</main>
 
 <?php get_footer(); ?>
+
 ```
 13. In __index.php__ copy all the code from `<aside class="col-md-3">` to the closing `</aside>` and paste it into __sidebar.php__.  
 ```php
