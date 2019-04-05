@@ -344,7 +344,6 @@ This will check if there are posts and if there are, it will loop over them and 
 
   <main>
     <div class="container">
-
       <div class="row">
         <section class="col">
           <article id="post-<?php the_ID(); ?>">
