@@ -897,11 +897,25 @@ Can be created using a plugin or by coding it from scratch into the __functions.
 21. In __single-product.php__ change the code to the following:  
 ```php
 <?php setup_postdata( $post ); ?>
-<article id="post-<?php the_ID(); ?>">
-	<h1><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
-  <p><?php the_content(); ?></p>
-	<p><?php echo "Price: $".get_field('_price').".00"; ?></p>
-</article>
+
+<?php get_header(); ?>
+
+  <main>
+    <div class="container">
+
+      <div class="row">
+        <section class="col">
+					<article id="post-<?php the_ID(); ?>">
+						<h1><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+					  <p><?php the_content(); ?></p>
+						<p><?php echo "Price: $".get_field('_price').".00"; ?></p>
+					</article>
+	       </section>
+      </div><!-- .row -->
+    </div><!-- .container -->
+</main>
+
+<?php get_footer(); ?>
 ```
 22. To test click the Products link to view all products which will now display our custom layout as well as our custom Price field.
 
